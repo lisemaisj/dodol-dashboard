@@ -328,7 +328,7 @@ with st.sidebar:
         log_df = pd.DataFrame(st.session_state['reading_log'])
         def hl(val):
             return 'color:#2ca02c;font-weight:bold' if val=='Pass' else 'color:#d62728;font-weight:bold'
-        st.dataframe(log_df.style.applymap(hl, subset=['Outcome']),
+        st.dataframe(log_df.style.map(hl, subset=['Outcome']),
                      height=200, use_container_width=True)
 
     # Supervisor section
@@ -514,7 +514,7 @@ with right:
                 <div style='font-size:0.7em;color:#888888;margin-bottom:6px;font-style:italic;'>
                     Prediction based on learned historical patterns · confidence improves with more readings
                 </div>
-                {'<span style=' + chr(34) + 'background:' + action_colour + ';color:white;border-radius:16px;padding:2px 12px;font-size:0.82em;font-weight:bold;' + chr(34) + '>' + rl + '</span>' if prediction == 'Pass' and prob_fail >= 0.15 else ''}
+                {f'<span style="background:{action_colour};color:white;border-radius:16px;padding:2px 12px;font-size:0.82em;font-weight:bold;">{rl}</span>' if prediction == "Pass" and prob_fail >= 0.15 else ""}
                 <div style='margin-top:8px;font-size:0.85em;color:#cccccc;'>
                     🟢 Pass: <b>{prob_pass*100:.0f}%</b>
                     &nbsp;&nbsp;
