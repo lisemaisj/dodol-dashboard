@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import joblib
 import os
 import warnings
+import streamlit.components.v1 as components
 warnings.filterwarnings("ignore")
 
 st.set_page_config(
@@ -499,8 +500,8 @@ with right:
                 f"<div style='margin:3px 0;font-size:0.76em;color:#dddddd;'>▶ {s}</div>"
                 for s in action_steps
             )
-            st.markdown(f"""
-            <div style='background:{pc}18;border:2px solid {pc};border-radius:12px;
+            card_html = f"""
+            <div style='font-family: "Source Sans 3", "Source Sans Pro", "Helvetica Neue", Arial, sans-serif; font-size:0.85rem; line-height:1.45; color:#dddddd; background:{pc}18; border:2px solid {pc}; border-radius:12px;
                         padding:12px 16px;'>
                 <div style='font-size:0.72em;color:#aaaaaa;'>
                     AI Quality Model &nbsp;|&nbsp; Based on {n_readings} hr(s) of readings
@@ -528,7 +529,9 @@ with right:
                     </div>
                     {steps_html}
                 </div>
-            </div>""", unsafe_allow_html=True)
+            </div>
+            """
+            components.html(card_html, height=360)
 
         with temp_col:
             n_viol = sum(1 for r in st.session_state['reading_log']
